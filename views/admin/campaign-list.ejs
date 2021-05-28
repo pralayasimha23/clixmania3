@@ -1,0 +1,173 @@
+<%-include('../partials/admin_header');-%>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Campaigns</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Campaign List</strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-4 mt-5">
+        <% if(messages.success) { %>
+        <div class="alert alert-success alert-dismissible fade show">
+
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <% messages.success.forEach(function(success){ %>
+            <div><%= success.msg %> <a href="/photoapp/<%= Campname.replace(/\s/g, '-') %>"> View Your Campaign</a>
+            </div>
+            <% }); %>
+        </div>
+
+        <% } %>
+
+        <% if(messages.errors) { %>
+        <div class="alert alert-danger alert-dismissible fade show">
+
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <% messages.errors.forEach(function(error){ %>
+            <div><%= error.msg %> View Campaign</div>
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% if(messages.info) { %>
+        <div class="alert alert-info alert-dismissible fade show">
+
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <% messages.info.forEach(function(info){ %>
+            <div><%= info.msg %></div>
+            <% }); %>
+        </div>
+        <% } %>
+    </div>
+
+
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li><a class="nav-link active" data-toggle="tab" href="#tab-1"> Photo Campain</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-stripped">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>
+                                                Campaign Image
+                                            </th>
+                                            <th>
+                                                Campaign URL
+                                            </th>
+                                            <th>
+                                                Campaign Name
+                                            </th>
+                                            <th>
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+
+
+
+                                        <% camplist.forEach(function(camp){%>
+                                        <tr data-id=<%=camp.id%> id='myAnchor' class="text-center">
+                                            <td>
+                                                <img class="" src="campaign/<%=camp.Banner%>"
+                                                    style="width:100px; height:50px;">
+                                            </td>
+                                            <td>
+                                                <a href="photoapp/<%=camp.slug%>"> <button type="button"
+                                                        class="btn btn-default">Campaign Link</button></a>
+
+                                            </td>
+                                            <td>
+
+
+                                                <strong> <%-camp.Title%> </strong>
+                                            </td>
+
+
+
+                                            <td>
+
+                                                <!-- <div class="row"> -->
+                                                <!--                                                             
+                                                    <div id="myAnchor" data-id=""  class="col-sm-2"> -->
+
+
+                                                <form action="/campaign/<%=camp.id%>" method="post">
+
+                                                    <a href="photoapp/<%=camp.slug%>/gallery/1"> <button type="button"
+                                                            class=" btn btn-success"
+                                                            data-style="expand-right">Gallery</button></a>
+                                                    <!-- <button href="photoapp/<%=camp.slug%>/analytics" class="ladda-button btn btn-danger" data-style="expand-right"><span class="ladda-label">Submit</span><span class="ladda-spinner"></span></button> -->
+                                                    <a href="photoapp/<%=camp.slug%>/analytics"> <button type="button"
+                                                            class=" btn btn-primary"
+                                                            data-style="expand-right">Analytics</button></a>
+
+                                                    <button data-id=<%=camp.id%> id='myAnchor'
+                                                        class="btn btn-outline btn-danger delete-camp ">Delete </button>
+
+
+
+                                                </form>
+                                                <!-- <form action="//edit" method='get'>
+                                                       
+                                                         
+                                                        <button class="btn btn-outline btn-info  "><i class="fa fa-edit"></i> </button>
+                                                    </form> -->
+                                                <!-- </div> -->
+
+
+
+                                            </td>
+
+                                        </tr>
+
+
+                                        <%})%>
+
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <%-include('../partials/admin_footer');-%>
